@@ -39,6 +39,21 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+//import { ListformComponent } from './views/listform/listform.component';
+import { EditformComponent } from './views/editform/editform.component';
+import {FormsModule,ReactiveFormsModule}    from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {UserService} from './views/shared/user.service';
+import { AuthGuard } from './views/auth_guards/auth.guard';
+import { AuthInterceptor } from './views/auth_guards/auth-interceptor';
+import { FormulaireService } from './views/shared/formulaire.service';
+import { ShowFormComponent } from './views/show-form/show-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { FormeditedComponent } from './views/formedited/formedited.component';
+import {CreateformModule} from './views/createform/createform.module';
+import {ListformModule} from './views/listform/listform.module';
+import { SendformComponent } from './views/sendform/sendform.component';
 
 @NgModule({
   imports: [
@@ -52,7 +67,15 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    CreateformModule,
+    ListformModule    
+    
   ],
   declarations: [
     AppComponent,
@@ -60,12 +83,29 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ShowFormComponent,
+    FormeditedComponent,
+   // ListformComponent,
+    EditformComponent,
+   SendformComponent
+ 
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
-  bootstrap: [ AppComponent ]
+  },
+  UserService,AuthGuard,FormulaireService,
+  {
+    provide : HTTP_INTERCEPTORS,
+    useClass : AuthInterceptor,
+    multi : true
+  }
+
+],
+  bootstrap: [ AppComponent ],
+  entryComponents: [
+    EditformComponent
+  ]  
 })
 export class AppModule { }

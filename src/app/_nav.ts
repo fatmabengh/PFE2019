@@ -32,36 +32,59 @@ export interface NavData {
 export const navItems: NavData[] = [
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: '/dashboard/dashboard',
     icon: 'icon-speedometer',
-    badge: {
+ /*    badge: {
       variant: 'info',
       text: 'NEW'
-    }
+    } */
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'Forms'
   },
-  {
-    name: 'Colors',
+/*   {
+    name: 'New Form',
     url: '/theme/colors',
-    icon: 'icon-drop'
+    icon: 'icon-note',
+    children: [
+      {
+        name: 'Start From Sratch',
+        url: '/base/forms',
+        icon: 'icon-pencil'
+      },
+      {
+        name: 'Choose a template',
+        url: '/base/cards',
+        icon: 'icon-puzzle'
+      }
+    ]
+  }, */
+  {
+    name: 'Choose a template',
+    url: '/base/cards',
+    icon: 'icon-puzzle'
+  },
+
+  {
+    name: 'Create form',
+    url: '/createform/createform',
+    icon: 'icon-note'
   },
   {
-    name: 'Typography',
-    url: '/theme/typography',
-    icon: 'icon-pencil'
+    name: 'All form',
+    url: '/listform/listform',
+    icon: 'icon-list'
   },
   {
     title: true,
-    name: 'Components'
+    name: 'Entries'
   },
   {
-    name: 'Base',
+    name: 'All Entries',
     url: '/base',
-    icon: 'icon-puzzle',
-    children: [
+    icon: 'icon-list',
+/*     children: [
       {
         name: 'Cards',
         url: '/base/cards',
@@ -117,10 +140,10 @@ export const navItems: NavData[] = [
         url: '/base/tooltips',
         icon: 'icon-puzzle'
       }
-    ]
+    ] */
   },
   {
-    name: 'Buttons',
+    name: 'Export',
     url: '/buttons',
     icon: 'icon-cursor',
     children: [
@@ -146,7 +169,7 @@ export const navItems: NavData[] = [
     url: '/charts',
     icon: 'icon-pie-chart'
   },
-  {
+/*   {
     name: 'Icons',
     url: '/icons',
     icon: 'icon-star',
@@ -211,7 +234,7 @@ export const navItems: NavData[] = [
       variant: 'info',
       text: 'NEW'
     }
-  },
+  }, */
   {
     divider: true
   },
@@ -246,7 +269,7 @@ export const navItems: NavData[] = [
       }
     ]
   },
-  {
+/*   {
     name: 'Disabled',
     url: '/dashboard',
     icon: 'icon-ban',
@@ -270,5 +293,5 @@ export const navItems: NavData[] = [
     icon: 'icon-layers',
     variant: 'danger',
     attributes: { target: '_blank', rel: 'noopener' }
-  }
+  } */
 ];

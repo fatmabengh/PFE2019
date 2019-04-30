@@ -1,0 +1,57 @@
+
+<div class="modal-header" >
+  <h4 class="modal-title pull-left">Edit Fields </h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+ <form [formGroup]="formedit">
+    <div *ngIf="form.types=='input'">
+      <div class="form-group row" >
+          <label class="col-md-3 col-form-label" for="text-input">Label</label>
+          <div class="col-md-9">
+            <input type="text" id="text-input" name="text-input" class="form-control" formControlName="label" value="{{form.label}}">
+          </div>
+        </div>
+        <div class="form-group row" >
+          <label class="col-md-3 col-form-label" for="text-input">Subtitle</label>
+          <div class="col-md-9">
+            <input type="text" formControlName="subtitle" class="form-control" value="{{form.subtitle}}">
+          </div>
+        </div>
+      </div>
+
+
+<div *ngIf="form.types=='check' || form.types=='dropdown' || form.types=='radio'">
+    <div class="form-group row" >
+        <label class="col-md-3 col-form-label" for="text-input">Label</label>
+        <div class="col-md-9">
+          <input type="text" id="text-input" name="text-input" class="form-control" formControlName="label" value="{{form.label}}">
+        </div>
+      </div>
+  <button type="button" class="btn .btn-sm" (click)="addItem()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+    <div [formGroup]="formedit.get('items')">
+        <div  *ngFor="let objKey of objectKeys(itemsE.controls)">
+            <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="text-input">Item</label>
+            <div class="col-md-6">
+                <input type="text" formControlName="{{objKey}}" class="form-control">
+              </div>
+
+                <button type="button" class="btn .btn-sm col-md-3" (click)="removeItem(objKey)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            
+        </div>
+    </div>  
+
+</div>
+</div>
+</form> 
+
+
+<button  type="button" class="btn btn-primary"(click)="Save()">Save</button>
+</div>
+
+<!-- ***************** -->

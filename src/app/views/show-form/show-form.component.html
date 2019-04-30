@@ -1,0 +1,91 @@
+<div class="app-body"  *ngIf="fieldData">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+                <div class="card-header">
+                    <strong>{{fieldData.title}}</strong>  <br> <p><small>{{fieldData.description}} </small></p>
+                  </div>
+                <br>
+                <form class="form-horizontal">
+    <div   *ngFor="let fields of fieldData.field">
+
+   
+                  <div class="form-group row" *ngIf="fields.types =='input'">
+                    <label class="col-md-3 col-form-label" for="text-input">{{fields.label}}</label>
+                    <div class="col-md-9">
+                      <input type="text" id="text-input" name="text-input" class="form-control" placeholder="{{fields.subtitle}}">
+                    </div>
+                  </div>
+<!--                   <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="date-input">Date Input</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
+                      <span class="help-block">Please enter a valid date</span>
+                    </div>
+                  </div> -->
+
+                  <div class="form-group row" *ngIf="fields.types =='dropdown'">
+                    <label class="col-md-3 col-form-label" for="select1">{{fields.label}}</label>
+                    <div class="col-md-9">
+                      <select id="select" name="select" class="form-control" >                                     
+                        <option *ngFor="let objKey of objectKeys(fields.items)" > {{fields.items[objKey]}}</option>                               
+                        </select>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group row" *ngIf="fields.types =='radio'">
+                    <label class="col-md-3 col-form-label" >{{fields.label}}</label>
+                    <div *ngFor="let objKey of objectKeys(fields.items)">
+                    <div class="col-md-9 col-form-label">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radios" id="radio1" value="option1" checked>
+                        <label class="form-check-label" for="radio">
+                          {{fields.items[objKey]}}
+                      </label>
+                      </div>
+                     </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row" *ngIf="fields.types =='check'" >
+                    <label class="col-md-3 col-form-label">{{fields.label}}</label>
+                    <div  *ngFor="let objKey of objectKeys(fields.items)">
+                    <div class="col-md-9 col-form-label">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="option1" id="checkbox1">
+                        <label class="form-check-label" for="checkbox">
+                          {{fields.items[objKey]}}
+                      </label>
+                      </div>
+
+                    </div>
+                    </div>
+                  </div>
+  
+<!--                   <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="file-input">File input</label>
+                    <div class="col-md-9">
+                      <input type="file" id="file-input" name="file-input">
+                    </div>
+                  </div> -->
+                </div>
+                </form>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                    <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                  </div>
+
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+</div>
+</main>
+</div>
+
+

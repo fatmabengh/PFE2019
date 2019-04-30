@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 
-import { DashboardComponent } from './dashboard.component';
+import { Routes, RouterModule } from '@angular/router';
+import { CreateformComponent} from './createform.component';
+
 
 const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'createform',
+    component: CreateformComponent,
     data: {
-      title: 'Dashboard'
+      title: 'Create form'
     }
   }
 ];
@@ -17,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class CreateformRoutingModule { }

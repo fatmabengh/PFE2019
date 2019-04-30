@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 
-import { DashboardComponent } from './dashboard.component';
+import { Routes, RouterModule } from '@angular/router';
+import { ListformComponent} from './listform.component';
+
 
 const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'listform',
+    component: ListformComponent,
     data: {
-      title: 'Dashboard'
+      title: 'All form'
     }
   }
 ];
@@ -17,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class ListformRoutingModule { }

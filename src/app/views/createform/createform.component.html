@@ -1,0 +1,220 @@
+<!--/.row-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-edit"></i>Form Elements
+        <div class="card-header-actions">
+          <button type="button" class="btn btn-pill btn-danger" (click)="AddFields(template)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal">
+
+            <div *ngFor="let form of Createdform">
+              <div *ngIf="form.types =='input'">
+                <div class="form-group">
+                    <label for="label" >{{form.label}}</label>
+                    <div class="input-group">
+                    <input type="label" id="label" name="label" class="form-control" placeholder="{{form.subtitle}}">
+                    <span class="input-group-append">
+                        <button type="button" class="btn .btn-sm col-md-3" (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        <button type="button" class="btn .btn-sm col-md-3" (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      </span>
+                    </div>
+                  </div>
+              </div>
+           
+
+            <div *ngIf="form.types =='check'">               
+                <div class="form-group">                    
+                    <label for="label" >{{form.label}}</label>
+                    <div  *ngFor="let objKey of objectKeys(form.items)">
+                        <div class="col-md-9 col-form-label">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="option1" id="checkbox1">
+                            <label class="form-check-label" for="checkbox">
+                                {{form.items[objKey]}}
+                            </label>
+                          </div>  
+                        </div>                
+                  </div>
+                  <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                      <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                      <button type="button" class="btn .btn-sm " (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </div>
+                </div>
+            </div>
+            
+            <div *ngIf="form.types =='dropdown'">               
+                <div class="form-group">                    
+                    <div class="form-group">                    
+                        <label for="label" >{{form.label}}</label>                        
+                        <div class="form-check">
+                            <div class="form-group row">                                
+                                <div class="col-md-9">
+                                  <select id="select" name="select" class="form-control" >                                     
+                                      <option *ngFor="let objKey of objectKeys(form.items)" value="{{objKey}}" > {{form.items[objKey]}}</option>                               
+                                      </select>
+                                </div>
+                                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                                    <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn .btn-sm" (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </div>
+                              </div>
+                          </div>  
+                        </div>                
+                  </div>                  
+                </div>
+
+                <div *ngIf="form.types =='radio'">  
+                    <div class="form-group">                    
+                        <label for="label" >{{form.label}}</label>
+                        <div  *ngFor="let objKey of objectKeys(form.items)">
+                            <div class="col-md-9 col-form-label">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radios" id="radio" value="option">
+                                <label class="form-check-label" for="radio1">
+                                    {{form.items[objKey]}}
+                                </label>
+                              </div>  
+                            </div>                
+                      </div>
+                      <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                          <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                          <button type="button" class="btn .btn-sm " (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                </div>
+            </div>   
+
+     
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary"(click)="saveForm()">Save changes</button>
+          <button class="btn btn-secondary" type="button">Cancel</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div> <!--/.col-->
+</div><!--/.row-->
+
+
+<!--modal for configuration fields for formulaire-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Fields Configuration</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+      <form [formGroup]="formCreate">
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="text-input">Label</label>
+              <div class="col-md-9">
+                <input type="text" id="text-input" name="text-input" class="form-control" formControlName="label" placeholder="enter label">
+              </div>
+            </div>
+         
+              <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="select">Select</label>
+                  <div class="col-md-9">
+                    <select id="select" name="select" class="form-control" formControlName="types"  [(ngModel)]="selectedLevel" > 
+                        <option value="radio" >Radio Boutton</option>
+                        <option value="input">IntputText</option>
+                        <option value="dropdown">DropDown</option>
+                        <option value="check">CheckBox</option>
+                    </select>
+                  </div>
+                </div>
+
+   <div *ngIf="selectedLevel =='input'">
+    <div class="form-group row" >
+      <label class="col-md-3 col-form-label" for="text-input">Subtitle</label>
+      <div class="col-md-9">
+        <input type="text" formControlName="subtitle" class="form-control" placeholder="entre placeholder">
+      </div>
+    </div>
+  </div> 
+
+  <div *ngIf="selectedLevel=='check' || selectedLevel=='dropdown' || selectedLevel=='radio'">
+      <button type="button" class="btn .btn-sm" (click)="addItem()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+   
+        <div [formGroup]="formCreate.get('items')">
+            <div  *ngFor="let item of ctrlListe">
+                <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="text-input">Item</label>
+                <div class="col-md-6">
+                    <input type="text" formControlName="{{item}}" class="form-control">
+                  </div>
+
+                    <button type="button" class="btn .btn-sm col-md-3" (click)="removeItem(item)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                
+            </div>
+        </div>  
+
+    </div>
+  </div>
+ </form>
+
+
+    <button  type="button" class="btn btn-primary"(click)="Save()" >Save</button>
+  </div>
+</ng-template>
+
+<!-- configure title, desciprtion of formulaire and if the form is active or not -->
+
+<ng-template #templateConfig>
+<div class="modal-header" >
+  <h4 class="modal-title pull-left">General Configuration of form </h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+ <form [formGroup]="form">
+    <div >
+      <div class="form-group row" >
+          <label class="col-md-3 col-form-label" for="text-input">Title of form</label>
+          <div class="col-md-9">
+            <input type="text" id="text-input" name="text-input" class="form-control" formControlName="title">
+          </div>
+        </div>
+        <div class="form-group row" >
+          <label class="col-md-3 col-form-label" for="text-input">Description*</label>
+          <div class="col-md-9">
+            <input type="text"  class="form-control" formControlName="description">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="date-input">Start Date*</label>
+          <div class="col-md-9">
+            <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
+            <span class="help-block">Start date of form validity</span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="date-input">End Date*</label>
+          <div class="col-md-9">
+            <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date" formControlName="expiration_date">
+            <span class="help-block">End date of form validity</span>
+          </div>
+        </div>
+        
+      </div>
+
+
+</form> 
+
+
+<button  type="button" class="btn btn-primary"(click)="SaveGeneralConfig()">Save</button>
+<br>
+<p><small>* optional </small></p>
+</div>
+</ng-template>
+<!-- ***************** -->
