@@ -1,39 +1,98 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {FormulaireService} from '../shared/formulaire.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-show-form',
   templateUrl: './show-form.component.html',
   styleUrls: ['./show-form.component.scss']
 })
-export class ShowFormComponent implements OnInit {
+export class ShowFormComponent implements OnInit,AfterViewInit {
   fieldData: any;
   isLoginError = false;
   objectKeys;
-  constructor(private formService: FormulaireService,private router: Router) { }
+  response: FormGroup;
+/*   selectedRadio: string= '';
+  selectedCheck: string= ''; */
+  listInput=[];
+  Listcheck= [];
+  ListRadio=[];
+  results= [];
+  ListDrop=[];
+  exist: boolean=false;
+ // testObject = {'id_question': '','reponse': ''};
+  constructor(private formService: FormulaireService,private router: Router, private fb: FormBuilder,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
        this.objectKeys = Object.keys;
-    this.formService.GetFormId().subscribe((data: any) => {
+       this.fields();
+       
+       this.activatedRoute.params.subscribe(params => {
+        console.log(params['id']);
+        localStorage.setItem('form_id',params['id']);
+      });
+  
+  }
+  fields(){
+    this.response= this.fb.group({
+      'input': new FormControl(''),
+      'check': new FormControl(''),
+      'drop': new FormControl(''),
+      'radio': new FormControl(''),
+    });
 
+  }
+  ngAfterViewInit() {
+    this.formService.GetFormId().subscribe((data: any) => {
       this.fieldData = data;
-  /*    for(let i=0;i<this.fieldData.field.length;i++){
-          this.fieldData.field[i].items= JSON.parse( this.fieldData.field[i].items);
-        console.log( JSON.parse( this.fieldData.field[i].items));
-      }  */ 
-      this.fieldData.field[0].items= JSON.parse( this.fieldData.field[0].items);
-      this.fieldData.field[1].items= JSON.parse( this.fieldData.field[1].items);
-     
-      
-     
-    },
-    (err: HttpErrorResponse) => {
-     console.log(err);
-       this.isLoginError = true;
-     });
+      console.log(this.fieldData);
+      for(let i=0;i<this.fieldData.field.length;i++){
+        this.fieldData.field[i].items= JSON.parse( this.fieldData.field[i].items);
+   
+   }  
+    });
+
    
   }
+  SubmitForm(){
+   /*  console.log(this.listInput);
+    console.log(this.Listcheck);
+    console.log(this.ListRadio); */
+    console.log(this.ListDrop);
+    this.Listcheck = this.Listcheck.concat(this.listInput);
+    console.log(this.Listcheck);
+    this.exist=true;
+   
+  }
+  back(){
+    console.log('ok');
+    this.exist=false;
+  }
 
+  selectChangeHandler (id,event: any) {
+   // this.selectedRadio = event.target.value;
+    this.listInput.push({id_question: id, reponse: event});
+    // this.testObject['id_question']=id;
+   // this.testObject['reponse']=event; 
+  }
+
+  selectChangeHandlercheck(id,event: any,objKey) {
+    //update the ui
+    //this.selectedCheck = event.target.value;
+  
+    this.Listcheck.push({id_question: id, reponse: {id: objKey,value:event}});
+    //console.log(event,id );
+  } 
+  selectChangeHandlerRadio(id,event: any,objKey){
+    console.log(event,id );
+    this.ListRadio.push({id_question: id, reponse: {id: objKey,value:event}});
+
+  }
+  selectChangeHandlerDrop(id,event: any,objKey){
+    console.log(event,id );
+    this.ListDrop.push({id_question: id, reponse: event});
+
+  }
 }

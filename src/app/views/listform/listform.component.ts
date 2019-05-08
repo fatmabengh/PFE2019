@@ -38,8 +38,8 @@ export class ListformComponent implements OnInit {
   }
   Show(form_id){
   
-    localStorage.setItem('form_id',form_id);
-    this.router.navigate(['/ShowForm']);
+    
+    this.router.navigate(['/ShowForm',form_id]);
   }
 
   DeleteForm(form_id){

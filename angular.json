@@ -25,7 +25,10 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
               "node_modules/ngx-toastr/toastr.css",
-              "src/scss/style.scss"
+              "src/scss/style.scss",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/quill/dist/quill.bubble.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["./node_modules"]

@@ -25,7 +25,7 @@ export const routes: Routes = [
       title: 'Page 404'
     }
   },
-  { path : 'ShowForm',
+  { path : 'ShowForm/:id',
    component: ShowFormComponent
   },
   {
@@ -97,6 +97,10 @@ export const routes: Routes = [
       {
         path: 'listform',
         loadChildren: './views/listform/listform.module#ListformModule'
+      },
+      {
+        path: 'sendform',
+        loadChildren: './views/sendform/sendform.module#SendformModule'
       }
 
     ]

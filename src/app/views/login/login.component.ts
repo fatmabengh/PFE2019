@@ -40,14 +40,15 @@ if(data){
 ;}
 else{
   this.msg.success('failed to login please try again');
-}
+}   
+  (err: HttpErrorResponse) => {
+  console.log(err);
+  this.msg.success('failed to login please try again');
+    this.isLoginError = true;}
+  });
     
-    });
- /*    (err: HttpErrorResponse) => {
-    console.log(err);
-    this.msg.success('failed to login please try again');
-      this.isLoginError = true;
-    }); */
+   
+
     }
 }
 

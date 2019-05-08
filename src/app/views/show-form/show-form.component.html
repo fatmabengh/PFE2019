@@ -1,22 +1,23 @@
-<div class="app-body"  *ngIf="fieldData">
+<div class="app-body"  *ngIf="fieldData" >
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
         <div class="col-md-12 mx-auto">
           <div class="card mx-4">
-            <div class="card-body p-4">
+            <div class="card-body p-4"  *ngIf="!exist">
                 <div class="card-header">
                     <strong>{{fieldData.title}}</strong>  <br> <p><small>{{fieldData.description}} </small></p>
                   </div>
                 <br>
-                <form class="form-horizontal">
-    <div   *ngFor="let fields of fieldData.field">
+
+                <form class="form-horizontal" [formGroup]="response">
+                    <div *ngFor="let fields of fieldData.field">
 
    
                   <div class="form-group row" *ngIf="fields.types =='input'">
                     <label class="col-md-3 col-form-label" for="text-input">{{fields.label}}</label>
                     <div class="col-md-9">
-                      <input type="text" id="text-input" name="text-input" class="form-control" placeholder="{{fields.subtitle}}">
+                      <input type="text" id="{{fields.id}}" name="text-input" class="form-control" placeholder="{{fields.subtitle}}" (input)="selectChangeHandler(fields.id,$event.target.value)" >
                     </div>
                   </div>
 <!--                   <div class="form-group row">
@@ -30,7 +31,8 @@
                   <div class="form-group row" *ngIf="fields.types =='dropdown'">
                     <label class="col-md-3 col-form-label" for="select1">{{fields.label}}</label>
                     <div class="col-md-9">
-                      <select id="select" name="select" class="form-control" >                                     
+                      <select id="select" name="select" class="form-control" (change)="selectChangeHandlerDrop(fields.id,$event.target.value,objKey)">                                     
+                       <option>Select item</option>
                         <option *ngFor="let objKey of objectKeys(fields.items)" > {{fields.items[objKey]}}</option>                               
                         </select>
                     </div>
@@ -42,13 +44,15 @@
                     <div *ngFor="let objKey of objectKeys(fields.items)">
                     <div class="col-md-9 col-form-label">
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radios" id="radio1" value="option1" checked>
-                        <label class="form-check-label" for="radio">
-                          {{fields.items[objKey]}}
+                        <input class="form-check-input" type="radio" name="radio" id="{{objKey}}" value="{{fields.items[objKey]}}"  (change)="selectChangeHandlerRadio(fields.id,$event.target.value,objKey)" >
+                        <label class="form-check-label" for="radio" >
+                          {{fields.items[objKey]}} 
                       </label>
+                     
                       </div>
                      </div>
                     </div>
+                 
                   </div>
 
                   <div class="form-group row" *ngIf="fields.types =='check'" >
@@ -56,14 +60,16 @@
                     <div  *ngFor="let objKey of objectKeys(fields.items)">
                     <div class="col-md-9 col-form-label">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="option1" id="checkbox1">
+                        <input class="form-check-input" name="options" type="checkbox" value="{{fields.items[objKey]}}" id="{{objKey}}" (change)="selectChangeHandlercheck(fields.id,$event.target.value,objKey)">
                         <label class="form-check-label" for="checkbox">
-                          {{fields.items[objKey]}}
+                          {{fields.items[objKey]}} 
                       </label>
                       </div>
 
+                      </div>
+                      
                     </div>
-                    </div>
+                    
                   </div>
   
 <!--                   <div class="form-group row">
@@ -75,10 +81,27 @@
                 </div>
                 </form>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                    <button type="submit" class="btn btn-sm btn-primary" (click)="SubmitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
                     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
                   </div>
 
+      </div>
+      <div *ngIf="exist">
+          <div class="card-header">
+              <strong>Form Submitted ! </strong> 
+            </div>
+          <br>
+          <form class="form-horizontal" >
+              <div class="form-group row">
+                  <label class="col-md-9 col-form-label"> Your form has been successfully registered !</label>
+                  
+              </div>
+     
+      </form>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary" (click)="back()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back for another response </button>
+         
+        </div>
       </div>
     </div>
   </div>
@@ -87,5 +110,34 @@
 </div>
 </main>
 </div>
+
+
+<div *ngIf="!fieldData">
+  <div class="app flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="clearfix">
+            <h1 class="float-left display-3 mr-4">404</h1>
+            <h4 class="pt-3">Oops! You're lost.</h4>
+            <p class="text-muted">The page you are looking for was not found.</p>
+          </div>
+          <div class="input-prepend input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+            <input id="prependedInput" class="form-control" size="16" type="text" placeholder="What are you looking for?">
+            <span class="input-group-append">
+              <button class="btn btn-info" type="button">Search</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 

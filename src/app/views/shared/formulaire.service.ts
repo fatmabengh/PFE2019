@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import {Formulaire} from '../shared/formulaire';
+import { Sendform} from '../shared/sendform';
 /* const reqHeader = new HttpHeaders({
   'content-type': 'application/json',
   'No-Auth': 'False',
@@ -44,7 +45,8 @@ setFormData(formData){
     return this.http.get(this.uri+'/api/userForm/'+ localStorage.getItem('user_id') );
   }
   GetFormId(){
-    return this.http.get(this.uri+'/api/getForm/'+ localStorage.getItem('form_id') );
+   // return this.http.get(this.uri+'/api/getForm/'+ localStorage.getItem('form_id') );
+   return this.http.get(this.uri+'/getForm/'+ localStorage.getItem('form_id') );
   }
   DeleteForm(){
     return this.http.delete(this.uri+'/api/deleteform/'+ localStorage.getItem('idForm_Delete') );
@@ -70,6 +72,19 @@ setFormData(formData){
     console.log(body);
     return this.http.put(this.uri+'/api/UpdateForm/'+ localStorage.getItem('idForm_Edit'), body ); 
   } 
+
+  SendFormtoUser(sendform){
+    const body : Sendform = {
+      subject: sendform['subject'],
+      recipient: sendform['recipient'],
+      sender: "fatoumaf16@gmail.com",
+      body: sendform['body'],
+
+    }
+    console.log(body);
+    return this.http.post(this.uri + '/api/SendMailForm', body);
+
+  }
   
 
 }

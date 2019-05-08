@@ -77,6 +77,11 @@ export const navItems: NavData[] = [
     icon: 'icon-list'
   },
   {
+    name: 'Send form',
+    url: '/sendform/sendform',
+    icon: 'icon-speech'
+  },
+  {
     title: true,
     name: 'Entries'
   },
@@ -235,7 +240,7 @@ export const navItems: NavData[] = [
       text: 'NEW'
     }
   }, */
-  {
+  /* {
     divider: true
   },
   {
@@ -268,7 +273,7 @@ export const navItems: NavData[] = [
         icon: 'icon-star'
       }
     ]
-  },
+  }, */
 /*   {
     name: 'Disabled',
     url: '/dashboard',
