@@ -101,6 +101,10 @@ export const routes: Routes = [
       {
         path: 'sendform',
         loadChildren: './views/sendform/sendform.module#SendformModule'
+      },
+      {
+        path: 'AllEntries',
+        loadChildren: './views/entries/entries.module#EntriesModule'
       }
 
     ]

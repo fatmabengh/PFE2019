@@ -11,7 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EditformComponent } from '../editform/editform.component';
-
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     ListformComponent,
@@ -32,7 +32,7 @@ import { EditformComponent } from '../editform/editform.component';
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
-    }
+    }, DatePipe
   ]
 /*   entryComponents: [
     EditformComponent

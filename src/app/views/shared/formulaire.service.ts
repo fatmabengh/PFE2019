@@ -69,7 +69,7 @@ setFormData(formData){
       fields: FormEdited,
       user_id: parseInt(localStorage.getItem('user_id'))
     }
-    console.log(body);
+   // console.log(body);
     return this.http.put(this.uri+'/api/UpdateForm/'+ localStorage.getItem('idForm_Edit'), body ); 
   } 
 
@@ -81,10 +81,16 @@ setFormData(formData){
       body: sendform['body'],
 
     }
-    console.log(body);
-    return this.http.post(this.uri + '/api/SendMailForm', body);
+    return this.http.post(this.uri + '/api/SendMailForm/'+ localStorage.getItem('user_id'), body);
 
   }
+  TraceMailer(){
+    return this.http.get(this.uri+'/api/getMailTrace/'+ localStorage.getItem('user_id') );
+  }
+  DeleteField(){
+    return this.http.delete(this.uri+'/api/deleteField/'+ localStorage.getItem('idField_Delete') );
+  }
+  
   
 
 }

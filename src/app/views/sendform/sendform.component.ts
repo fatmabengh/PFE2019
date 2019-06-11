@@ -11,11 +11,19 @@ import {ToastrService} from 'ngx-toastr';
 export class SendformComponent implements OnInit {
 Sendform: FormGroup;
 editorContent: string;
-cptmail=0;
+cptmail;
+traceMail: any;
+selectedRow;
   constructor(private fb: FormBuilder,private formService: FormulaireService,private msg: ToastrService) { }
 
   ngOnInit() {
     this.create();
+    this.formService.TraceMailer().subscribe((data:any)=> {
+      this.traceMail=data;
+      this.cptmail=this.traceMail.length;
+      console.log(data);
+
+    });
   }
   create(){
     this.Sendform = this.fb.group({
@@ -30,10 +38,12 @@ cptmail=0;
     this.editorContent= this.Sendform.get('body').value;
     this.formService.SendFormtoUser(this.Sendform.value).subscribe((data: any) => {
       this.msg.success(data);
-     this.cptmail++;
+    
     });
     this.Sendform.reset();
-/*     console.log(this.editorContent);
-console.log(this.Sendform.value); */
   }
+  RowSelected(u:any){
+    this.selectedRow=u;
+  
+   }
 }

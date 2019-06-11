@@ -29,9 +29,8 @@ export class LoginComponent implements OnInit{
 
 let email= this.credentials.get('email').value;
 let password=this.credentials.get('password').value;
-console.log(email ,password);
 this.UserService.login(email, password).subscribe((data: any) => {
-  console.log(data);
+ 
 if(data){
       localStorage.setItem('userToken', data.access_token);
       localStorage.setItem('user_id',data.user_id);
@@ -39,12 +38,9 @@ if(data){
       this.router.navigate(['/dashboard/dashboard']);
 ;}
 else{
-  this.msg.success('failed to login please try again');
+  this.msg.error('failed to login please try again');
 }   
-  (err: HttpErrorResponse) => {
-  console.log(err);
-  this.msg.success('failed to login please try again');
-    this.isLoginError = true;}
+  
   });
     
    

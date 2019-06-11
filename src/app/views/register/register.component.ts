@@ -29,19 +29,22 @@ export class RegisterComponent implements OnInit {
  if(this.registration.valid){
    if(this.registration.get('password').value== this.registration.get('newpassword').value){
      
-      console.log('ok');}
+     
     this.UserService.Registration(this.registration.value).subscribe((data: any) => {
-      //console.log(data);
-      //console.log(this.registration.value);
-      localStorage.setItem('userID', data.user_id);
-      this.msg.success('user registred successfully');
-      this.router.navigate(['/login']);
+      console.log(data);
+      if (data ==true){
+        localStorage.setItem('userID', data.user_id);
+        this.msg.success('user registred successfully');
+        this.router.navigate(['/login']);
+      }
+      if (data == false) {
+        this.msg.error("Username or email exist already");
+      }
 
-    },
-    (err: HttpErrorResponse) => {
-    console.log(err);
-      this.isLoginError = true;
-    }); 
+
+    }); } else {
+      this.msg.error('failed to register ! verify u\'re password');
+    }
   }
 
   

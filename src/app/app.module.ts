@@ -53,7 +53,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormeditedComponent } from './views/formedited/formedited.component';
 import {CreateformModule} from './views/createform/createform.module';
 import {ListformModule} from './views/listform/listform.module';
-import { EntriesComponent } from './views/entries/entries.component';
+//import { EntriesComponent } from './views/entries/entries.component';
 //import { SendformComponent } from './views/sendform/sendform.component';
 
 @NgModule({
@@ -89,7 +89,7 @@ import { EntriesComponent } from './views/entries/entries.component';
     FormeditedComponent,
    // ListformComponent,
     EditformComponent,
-   EntriesComponent,
+  // EntriesComponent,
    //SendformComponent
  
   ],

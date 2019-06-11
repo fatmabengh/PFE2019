@@ -14,12 +14,12 @@
                   </div>
                   <input [ngClass]="{'is-invalid': registration.get('nomComplet').invalid && registration.get('nomComplet').dirty}"
                   type="text" class="form-control" placeholder="Username" formControlName="nomComplet" required>
-                 
+                
                    <div class="invalid-feedback"  *ngIf="registration.get('nomComplet').hasError('required') && registration.get('nomComplet').dirty" >
                      Please choose a username.
                    </div>
+                  </div>
                  
-                 </div>
                   <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">@</span>
@@ -38,17 +38,23 @@
                   </div>
                   <input type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password" formControlName="newpassword" required>
                 </div>
-                <button type="button" class="btn btn-block btn-success" (click)="CreateAccount()">Create Account</button>
+                <button type="button" class="btn btn-block btn-success" (click)="CreateAccount()" [disabled]="!registration.valid">Create Account</button>
               </form>
             </div>
             <div class="card-footer p-4">
               <div class="row">
+                  <div class="col-6">
+                      <span><a href="https://sofia-holding.com/">B.GH</a> &copy; 2019</span>
+                     
+                  </div>
                 <div class="col-6">
-                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
+                    <span class="ml-auto">Powered by <a href="#">SOFIA Holding</a></span>
+              
                 </div>
-                <div class="col-6">
+             <!--  <div class="col-6">
+                   <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
                   <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

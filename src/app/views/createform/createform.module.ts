@@ -8,11 +8,14 @@ import { EditformComponent } from '../editform/editform.component';
 import {FormulaireService} from '../shared/formulaire.service';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthInterceptor } from '../auth_guards/auth-interceptor';
+import {AlertsComponent} from '../../views/notifications/alerts.component';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
   declarations: [
     CreateformComponent,
     //EditformComponent
+    AlertsComponent
 
     
   ],
@@ -22,7 +25,8 @@ import { AuthInterceptor } from '../auth_guards/auth-interceptor';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    AlertModule.forRoot()
   
    
     

@@ -1,130 +1,104 @@
-<div class="animated fadeIn">
-  <div class="card-columns cols-2">
-    <div class="card">
+
+<div class="col-sm-7 col-md-5">
+    <div class="card card-accent-primary">
       <div class="card-header">
-        Line Chart
-        <div class="card-header-actions">
-          <a href="http://www.chartjs.org">
-            <small class="text-muted">docs</small>
-          </a>
-        </div>
+          Insights
+          <div class="card-header-actions">
+            <button type="button" class="btn btn-primary" (click)="GetInsights()"><i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;Get Insights</button>
+            <!-- <button type="button" class="btn btn-pill btn-danger" (click)="GetInsights()"><i class="fa fa-line-chart" aria-hidden="true"></i></button> -->
+          </div>
       </div>
+
       <div class="card-body">
-        <div class="chart-wrapper">
-          <canvas baseChart class="chart"
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColours"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        Bar Chart
-        <div class="card-header-actions">
-          <a href="http://www.chartjs.org">
-            <small class="text-muted">docs</small>
-          </a>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="chart-wrapper">
-          <canvas baseChart class="chart"
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"
-          [legend]="barChartLegend"
-          [chartType]="barChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        Doughnut Chart
-        <div class="card-header-actions">
-          <a href="http://www.chartjs.org">
-            <small class="text-muted">docs</small>
-          </a>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="chart-wrapper">
-          <canvas baseChart class="chart"
-          [data]="doughnutChartData"
-          [labels]="doughnutChartLabels"
-          [chartType]="doughnutChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        Radar Chart
-        <div class="card-header-actions">
-          <a href="http://www.chartjs.org">
-            <small class="text-muted">docs</small>
-          </a>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="chart-wrapper">
-          <canvas baseChart class="chart"
-          [datasets]="radarChartData"
-          [labels]="radarChartLabels"
-          [chartType]="radarChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        Pie Chart
-        <div class="card-header-actions">
-          <a href="http://www.chartjs.org">
-            <small class="text-muted">docs</small>
-          </a>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="chart-wrapper">
-          <canvas baseChart class="chart"
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [chartType]="pieChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        Polar Area Chart
-        <div class="card-header-actions">
-          <a href="http://www.chartjs.org">
-            <small class="text-muted">docs</small>
-          </a>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="chart-wrapper">
-          <canvas baseChart class="chart"
-          [data]="polarAreaChartData"
-          [labels]="polarAreaChartLabels"
-          [legend]="polarAreaLegend"
-          [chartType]="polarAreaChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-        </div>
+          <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <div class="form-group row">
+              <label class="col-md-4 col-form-label" for="select1">Select Form</label>
+                <div class="col-md-8">
+                   <select id="select" name="select" class="form-control" [(ngModel)]="FormSelected" (change)="changedrop($event.target.value)">     
+                     <option>Select forms</option>                                
+                      <option *ngFor="let i of formData" [value]="i.id"> {{i.title}}</option>                
+                        </select> 
+                  </div>
+              </div>
+            
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label" for="select2">Period</label>
+                <div class="col-md-8">
+                  <select id="select2" name="select2" class="form-control form-control-sm" [(ngModel)]="PeriodSelected">
+                    <option value="0">All</option>
+                    <option value="1">Custom</option>
+                  </select>
+
+                </div>
+              </div>
+
+            <div class="form-group row" *ngIf="PeriodSelected==1">
+                  <label class="col-md-4 col-form-label" for="date-input">Select Date</label>
+                  <div class="col-md-8">
+                      <div class="col-md-9">
+                        <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
+                      </div>
+                  </div>
+                </div>
+            </form>
+
       </div>
     </div>
   </div>
-</div>
+  <div *ngIf="exist">
+<div class="animated fadeIn">
+    <div class="card-columns cols-2">
+
+      <div class="card">
+        <div class="card-header">
+          RadioChart Chart
+          <div class="card-header-actions">
+           
+              <small class="text-muted">Entries Analyzed: {{EntrieAnalyzed}}</small>
+            
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-wrapper">
+            <canvas baseChart class="chart"
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="card">
+          <div class="card-header">
+            DropDown Chart
+            <div class="card-header-actions">
+             
+                <small class="text-muted">Entries Analyzed: {{EntrieAnalyzed}}</small>
+              
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-wrapper">
+              <canvas baseChart class="chart"
+              [datasets]="barChartData2"
+              [labels]="barChartLabels2"
+              [options]="barChartOptions2"
+              [legend]="barChartLegend2"
+              [chartType]="barChartType2"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+        </div>
+
+ 
+
+    </div>
+  </div>
+  </div>

@@ -16,23 +16,56 @@
           </thead>     
           <tbody>
          
-            <tr *ngFor="let i of formData; let i=index">
+            <tr *ngFor="let i of formData; let i=index" (click)="RowSelected(i)" [class.active]="i == selectedRow">
               
               <td>{{i.title}}</td>
               <td>{{i.description}}</td>
               <td>{{i.date_modif['date']}}</td>
               <td>
-                <span class="badge badge-success">Active</span>
-                <div class="btn-group float-right" dropdown>
-                    <button type="button" class="btn dropdown-toggle p-0" dropdownToggle>
-                      <i class="fa fa-cogs" aria-hidden="true"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-                      <a class="dropdown-item" (click)="Show(i.id)"><i class="fa fa-eye" aria-hidden="true"></i>Show</a>
-                      <a class="dropdown-item" (click)="EditForm(i.id)"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
-                      <a class="dropdown-item" (click)="DeleteForm(i.id)"><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                  <!-- {{i.expiration_date}}**{{dateJour}} -->
+             <div  *ngIf="i.expiration_date > dateJour">
+                  <span class="badge badge-success">Active</span>
+                  <div class="btn-group float-right" dropdown>
+                      <button type="button" class="btn dropdown-toggle p-0" dropdownToggle>
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+                        <a class="dropdown-item" (click)="Show(i.id)"><i class="fa fa-eye" aria-hidden="true"></i>Show</a>
+                        <a class="dropdown-item" (click)="EditForm(i.id)"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
+                        <a class="dropdown-item" (click)="openModalDelete(templateDeleteForm)"><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                      </div>
                     </div>
-                  </div>
+                    <ng-template #templateDeleteForm>
+                      <div class="modal-body text-center">
+                        <p>Delete {{i.title}},Do you want to confirm?</p>
+                        <button type="button" class="btn btn-default" (click)="DeleteForm(i.id)" >Yes</button>
+                        <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                      </div>
+                    </ng-template>
+                </div>  
+             
+                <div  *ngIf="i.expiration_date < dateJour">
+                  <span class="badge badge-secondary">Inactive</span>
+                  <div class="btn-group float-right" dropdown >
+                      <button type="button" class="btn dropdown-toggle p-0 disabled" dropdownToggle >
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+                        <a class="dropdown-item disabled" (click)="Show(i.id)"><i class="fa fa-eye" aria-hidden="true"></i>Show</a>
+                        <a class="dropdown-item disabled" (click)="EditForm(i.id)"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a>
+                        <a class="dropdown-item disabled" (click)="openModalDelete(templateDeleteForm)"><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                      </div>
+                    </div>
+                    <ng-template #templateDeleteForm>
+                      <div class="modal-body text-center">
+                        <p>Delete {{i.title}},Do you want to confirm?</p>
+                        <button type="button" class="btn btn-default" (click)="DeleteForm(i.id)" >Yes</button>
+                        <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                      </div>
+                    </ng-template>
+                </div> 
+                
+         
               </td>
               
              
@@ -77,79 +110,8 @@
               <div class="col-md-9">
                   <strong>{{fieldData.title}}</strong>    <br> <p><small>{{fieldData.description}} </small></p> 
               </div>
-       <!--      <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-              <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-              <button type="button" class="btn .btn-sm " (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-          </div> -->
         </div>
-<!--           <form class="form-horizontal">
-              <div   *ngFor="let fields of fieldData.field">
-          
-             
-                            <div class="form-group row" *ngIf="fields.types =='input'">
-                              <label class="col-md-3 col-form-label" for="text-input">{{fields.label}}</label>
-                              <div class="col-md-9">
-                                <input type="text" id="text-input" name="text-input" class="form-control" placeholder="{{fields.subtitle}}">
-                              </div>
-                              
-                            </div>
-      
-          
-                            <div class="form-group row" *ngIf="fields.types =='dropdown'">
-                              <label class="col-md-3 col-form-label" for="select1">{{fields.label}}</label>
-                              <div class="col-md-9">
-                                <select id="select" name="select" class="form-control" >                                     
-                                  <option *ngFor="let objKey of objectKeys(fields.items)" > {{fields.items[objKey]}}</option>                               
-                                  </select>
-                              </div>
-                              <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                                  <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                  <button type="button" class="btn .btn-sm " (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                              </div>
-                            </div>
-          
-          
-                            <div class="form-group row" *ngIf="fields.types =='radio'">
-                              <label class="col-md-3 col-form-label" >{{fields.label}}</label>
-                              <div *ngFor="let objKey of objectKeys(fields.items)">
-                              <div class="col-md-9 col-form-label">
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="radios" id="radio1" value="option1" checked>
-                                  <label class="form-check-label" for="radio">
-                                    {{fields.items[objKey]}}
-                                </label>
-                                </div>
-                               </div>
-                              </div>
-                              <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                                  <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                  <button type="button" class="btn .btn-sm " (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                              </div>
-                            </div>
-          
-                            <div class="form-group row" *ngIf="fields.types =='check'" >
-                              <label class="col-md-3 col-form-label">{{fields.label}}</label>
-                              <div  *ngFor="let objKey of objectKeys(fields.items)">
-                              <div class="col-md-9 col-form-label">
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="option1" id="checkbox1">
-                                  <label class="form-check-label" for="checkbox">
-                                    {{fields.items[objKey]}}
-                                </label>
-                                </div>
-          
-                              </div>
-                              </div>
-                            </div>
-            
-                        <div class="form-group row">
-                              <label class="col-md-3 col-form-label" for="file-input">File input</label>
-                              <div class="col-md-9">
-                                <input type="file" id="file-input" name="file-input">
-                              </div>
-                            </div> 
-                          </div>
-                          </form> -->
+
 
                           <div *ngFor="let form of Createdform">
                             <div *ngIf="form.types =='input'">
@@ -159,7 +121,7 @@
                                   <input type="label" id="label" name="label" class="form-control" placeholder="{{form.subtitle}}">
                                   <span class="input-group-append">
                                       <button type="button" class="btn .btn-sm col-md-3" (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                      <button type="button" class="btn .btn-sm col-md-3" (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                      <button type="button" class="btn .btn-sm col-md-3" (click)="DeleteFields(form.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </span>
                                   </div>
                                 </div>
@@ -181,7 +143,7 @@
                                 </div>
                                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
                                     <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                    <button type="button" class="btn .btn-sm " (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn .btn-sm " (click)="DeleteFields(form.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </div>
                               </div>
                           </div>
@@ -199,7 +161,7 @@
                                               </div>
                                               <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
                                                   <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                                  <button type="button" class="btn .btn-sm" (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                  <button type="button" class="btn .btn-sm" (click)="DeleteFields(form.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                               </div>
                                             </div>
                                         </div>  
@@ -222,7 +184,7 @@
                                     </div>
                                     <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
                                         <button type="button" class="btn .btn-sm " (click)="showEditModal(form)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn .btn-sm " (click)="DeleteFields(form)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn .btn-sm " (click)="DeleteFields(form.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </div>
                                   </div>
                               </div>

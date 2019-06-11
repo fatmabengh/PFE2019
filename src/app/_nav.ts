@@ -87,8 +87,9 @@ export const navItems: NavData[] = [
   },
   {
     name: 'All Entries',
-    url: '/base',
-    icon: 'icon-list',
+    url: '/AllEntries/AllEntries',
+    icon: 'icon-list'
+  },
 /*     children: [
       {
         name: 'Cards',
@@ -146,7 +147,11 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       }
     ] */
-  },
+    {
+      name: 'Charts',
+      url: '/charts',
+      icon: 'icon-pie-chart'
+    },
   {
     name: 'Export',
     url: '/buttons',
@@ -169,11 +174,7 @@ export const navItems: NavData[] = [
       }
     ]
   },
-  {
-    name: 'Charts',
-    url: '/charts',
-    icon: 'icon-pie-chart'
-  },
+
 /*   {
     name: 'Icons',
     url: '/icons',

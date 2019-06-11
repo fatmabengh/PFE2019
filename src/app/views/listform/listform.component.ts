@@ -5,6 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {FormGroup,FormControl,FormBuilder} from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { EditformComponent } from '../editform/editform.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-listform',
@@ -24,31 +25,43 @@ export class ListformComponent implements OnInit {
   items: FormGroup;
   edit:  boolean;
   k;
-  constructor(private fb: FormBuilder,private modalService: BsModalService,private formService: FormulaireService,private router: Router,private msg: ToastrService) { }
+  selectedRow ;
+  today: number = Date.now();
+  dateJour;
+  constructor(private fb: FormBuilder,private datePipe: DatePipe,
+    private modalService: BsModalService,private formService: FormulaireService,private router: Router,private msg: ToastrService) { }
 
   ngOnInit() {
     this.create();
     this.exist=false;
     this.objectKeys = Object.keys;
+  this.dateJour=this.datePipe.transform(this.today,"yyyy-MM-dd");
     this.formService.GetUserform().subscribe((data: any) => {
       this.formData = data;
-     // console.log(this.formData);
+
     });
-  
+   
+   
   }
-  Show(form_id){
-  
-    
+  Show(form_id){ 
     this.router.navigate(['/ShowForm',form_id]);
   }
 
   DeleteForm(form_id){
+   
     localStorage.setItem('idForm_Delete',form_id);
   this.formService.DeleteForm().subscribe((data: any) => {
       this.msg.success(data);
     
     }); 
  
+  }
+  openModalDelete(templateDeleteField: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(templateDeleteField, {class: 'modal-sm'});
+  }
+  decline(): void {
+
+    this.modalRef.hide();
   }
 
 // ******************************************************************
@@ -60,7 +73,7 @@ export class ListformComponent implements OnInit {
     localStorage.setItem('idForm_Edit',form_id);
     this.formService.getformEdit().subscribe((data: any) => {
       this.fieldData = data;
-      console.log(this.fieldData);
+   //   console.log(this.fieldData);
     //  console.log(this.fieldData.field[this.fieldData.field.length - 1].id);
       for(let i=0;i<this.fieldData.field.length;i++){
         
@@ -140,6 +153,20 @@ export class ListformComponent implements OnInit {
    this.msg.success(data);
 
    });
+ }
+ RowSelected(u:any){
+  this.selectedRow=u;
+ //console.log(u);
+ }
+ DeleteFields(field_id){
+   console.log(field_id);
+   localStorage.setItem('idField_Delete',field_id);
+  this.formService.DeleteField().subscribe((data: any) => {
+      this.msg.success(data);
+    
+    }); 
+ 
+
  }
 
 }

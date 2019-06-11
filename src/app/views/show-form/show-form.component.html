@@ -10,66 +10,72 @@
                   </div>
                 <br>
 
-                <form class="form-horizontal" [formGroup]="response">
+                <form class="form-horizontal" >
                     <div *ngFor="let fields of fieldData.field">
 
    
                   <div class="form-group row" *ngIf="fields.types =='input'">
-                    <label class="col-md-3 col-form-label" for="text-input">{{fields.label}}</label>
+                    <label class="col-md-3 col-form-label" for="text-input"><strong>{{fields.label}}<div *ngIf="fields.obligation==1">*</div></strong></label>
                     <div class="col-md-9">
-                      <input type="text" id="{{fields.id}}" name="text-input" class="form-control" placeholder="{{fields.subtitle}}" (input)="selectChangeHandler(fields.id,$event.target.value)" >
+                      <input [ngClass]="{'is-invalid': fields.obligation==1}"
+                      type="text" id="{{fields.id}}"  name="text-input" class="form-control" placeholder="{{fields.subtitle}}" (focusout)="onKey($event,fields.id,fields.label,fields.types)" >
+                      <div class="invalid-feedback" style="display: block;"  *ngIf="fields.obligation==1" >
+                        {{fields.label}} is required.
+                        </div>
                     </div>
                   </div>
-<!--                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="date-input">Date Input</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
-                      <span class="help-block">Please enter a valid date</span>
-                    </div>
-                  </div> -->
 
                   <div class="form-group row" *ngIf="fields.types =='dropdown'">
-                    <label class="col-md-3 col-form-label" for="select1">{{fields.label}}</label>
+                    <label class="col-md-3 col-form-label" for="select1"><strong>{{fields.label}} <div *ngIf="fields.obligation==1">*</div></strong></label>
                     <div class="col-md-9">
-                      <select id="select" name="select" class="form-control" (change)="selectChangeHandlerDrop(fields.id,$event.target.value,objKey)">                                     
+                      <select [ngClass]="{'is-invalid': fields.obligation==1}" id="select" name="select" class="form-control" (change)="selectChangeHandlerDrop(fields.id,$event.target.value,fields.label,fields.types)">                                     
                        <option>Select item</option>
                         <option *ngFor="let objKey of objectKeys(fields.items)" > {{fields.items[objKey]}}</option>                               
                         </select>
+                        <div class="invalid-feedback" style="display: block;"  *ngIf="fields.obligation==1" >
+                          {{fields.label}} is required.
+                          </div>
                     </div>
                   </div>
 
 
                   <div class="form-group row" *ngIf="fields.types =='radio'">
-                    <label class="col-md-3 col-form-label" >{{fields.label}}</label>
+                    <label class="col-md-3 col-form-label" ><strong>{{fields.label}}<div *ngIf="fields.obligation==1">*</div></strong></label>
                     <div *ngFor="let objKey of objectKeys(fields.items)">
                     <div class="col-md-9 col-form-label">
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radio" id="{{objKey}}" value="{{fields.items[objKey]}}"  (change)="selectChangeHandlerRadio(fields.id,$event.target.value,objKey)" >
+                        <input [ngClass]="{'is-invalid': fields.obligation==1}" class="form-check-input" type="radio" name="radio" id="{{objKey}}" value="{{fields.items[objKey]}}"  (change)="selectChangeHandlerRadio(fields.id,$event.target.value,fields.label,fields.types)" >
                         <label class="form-check-label" for="radio" >
                           {{fields.items[objKey]}} 
                       </label>
-                     
+                  
                       </div>
                      </div>
                     </div>
-                 
+                    <div class="invalid-feedback" style="display: block;"  *ngIf="fields.obligation==1" >
+                      {{fields.label}} is required.
+                      </div>
                   </div>
 
                   <div class="form-group row" *ngIf="fields.types =='check'" >
-                    <label class="col-md-3 col-form-label">{{fields.label}}</label>
+                    <label class="col-md-3 col-form-label"><strong>{{fields.label}}<div *ngIf="fields.obligation==1">*</div></strong></label>
                     <div  *ngFor="let objKey of objectKeys(fields.items)">
                     <div class="col-md-9 col-form-label">
                       <div class="form-check">
-                        <input class="form-check-input" name="options" type="checkbox" value="{{fields.items[objKey]}}" id="{{objKey}}" (change)="selectChangeHandlercheck(fields.id,$event.target.value,objKey)">
+                        <input [ngClass]="{'is-invalid': fields.obligation==1}" class="form-check-input" name="options" type="checkbox" value="{{fields.items[objKey]}}" id="{{objKey}}" (change)="selectChangeHandlercheck(fields.id,$event.target.value,fields.label,fields.types)">
                         <label class="form-check-label" for="checkbox">
                           {{fields.items[objKey]}} 
                       </label>
                       </div>
 
                       </div>
-                      
+                     
                     </div>
-                    
+                    <div class="form-group row">
+                    <div class="invalid-feedback col-md-10" style="display: block;"  *ngIf="fields.obligation==1" >
+                      {{fields.label}} is required.
+                      </div>
+                    </div>
                   </div>
   
 <!--                   <div class="form-group row">
@@ -79,9 +85,10 @@
                     </div>
                   </div> -->
                 </div>
+                <small>*Obligatoire</small>
                 </form>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-sm btn-primary" (click)="SubmitForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                    <button type="submit" class="btn btn-sm btn-primary" (click)="SubmitForm()" ><i class="fa fa-dot-circle-o"></i> Submit</button>
                     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
                   </div>
 
@@ -109,32 +116,6 @@
 </div>
 </div>
 </main>
-</div>
-
-
-<div *ngIf="!fieldData">
-  <div class="app flex-row align-items-center">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="clearfix">
-            <h1 class="float-left display-3 mr-4">404</h1>
-            <h4 class="pt-3">Oops! You're lost.</h4>
-            <p class="text-muted">The page you are looking for was not found.</p>
-          </div>
-          <div class="input-prepend input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fa fa-search"></i></span>
-            </div>
-            <input id="prependedInput" class="form-control" size="16" type="text" placeholder="What are you looking for?">
-            <span class="input-group-append">
-              <button class="btn btn-info" type="button">Search</button>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 

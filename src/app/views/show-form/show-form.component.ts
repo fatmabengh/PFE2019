@@ -3,6 +3,8 @@ import {FormulaireService} from '../shared/formulaire.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { ResponseService } from '../shared/response.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-show-form',
@@ -13,86 +15,66 @@ export class ShowFormComponent implements OnInit,AfterViewInit {
   fieldData: any;
   isLoginError = false;
   objectKeys;
-  response: FormGroup;
-/*   selectedRadio: string= '';
-  selectedCheck: string= ''; */
   listInput=[];
   Listcheck= [];
   ListRadio=[];
   results= [];
   ListDrop=[];
   exist: boolean=false;
- // testObject = {'id_question': '','reponse': ''};
-  constructor(private formService: FormulaireService,private router: Router, private fb: FormBuilder,private activatedRoute: ActivatedRoute) { }
+  inputValue;
+  listGlot=[];
+  constructor(private ResponseService: ResponseService ,private msg: ToastrService,
+    private formService: FormulaireService,private router: Router, private fb: FormBuilder,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
        this.objectKeys = Object.keys;
-       this.fields();
-       
+      this.listGlot= null;
        this.activatedRoute.params.subscribe(params => {
-        console.log(params['id']);
-        localStorage.setItem('form_id',params['id']);
+         localStorage.setItem('form_id',params['id']);
       });
   
   }
-  fields(){
-    this.response= this.fb.group({
-      'input': new FormControl(''),
-      'check': new FormControl(''),
-      'drop': new FormControl(''),
-      'radio': new FormControl(''),
-    });
 
-  }
   ngAfterViewInit() {
     this.formService.GetFormId().subscribe((data: any) => {
       this.fieldData = data;
       console.log(this.fieldData);
       for(let i=0;i<this.fieldData.field.length;i++){
         this.fieldData.field[i].items= JSON.parse( this.fieldData.field[i].items);
-   
-   }  
-    });
-
-   
+     }  
+    });  
   }
+
   SubmitForm(){
-   /*  console.log(this.listInput);
-    console.log(this.Listcheck);
-    console.log(this.ListRadio); */
-    console.log(this.ListDrop);
     this.Listcheck = this.Listcheck.concat(this.listInput);
-    console.log(this.Listcheck);
-    this.exist=true;
-   
+    this.ListDrop= this.ListDrop.concat(this.ListRadio);
+    this.listGlot=this.ListDrop.concat( this.Listcheck);
+   // console.log(this.listGlot);
+ this.ResponseService.SubmitReponse(this.listGlot).subscribe((data: any) => {
+      this.msg.success(data);
+      this.exist=true;
+    });  
   }
+
   back(){
-    console.log('ok');
+    this.listGlot= null;
     this.exist=false;
+    location.reload();
   }
-
-  selectChangeHandler (id,event: any) {
-   // this.selectedRadio = event.target.value;
-    this.listInput.push({id_question: id, reponse: event});
-    // this.testObject['id_question']=id;
-   // this.testObject['reponse']=event; 
-  }
-
-  selectChangeHandlercheck(id,event: any,objKey) {
-    //update the ui
-    //this.selectedCheck = event.target.value;
-  
-    this.Listcheck.push({id_question: id, reponse: {id: objKey,value:event}});
-    //console.log(event,id );
+  selectChangeHandlercheck(id,event: any,label,typeC) {
+   this.Listcheck.push({id_question: id, reponse: event,titre: label,type: typeC});
+   
   } 
-  selectChangeHandlerRadio(id,event: any,objKey){
-    console.log(event,id );
-    this.ListRadio.push({id_question: id, reponse: {id: objKey,value:event}});
+  selectChangeHandlerRadio(id,event: any,label,typeR){
+    this.ListRadio.push({id_question: id, reponse: event,titre: label,type: typeR});
 
   }
-  selectChangeHandlerDrop(id,event: any,objKey){
-    console.log(event,id );
-    this.ListDrop.push({id_question: id, reponse: event});
+  selectChangeHandlerDrop(id,event: any,label,typeD){
+   this.ListDrop.push({id_question: id, reponse: event,titre: label,type: typeD});
 
+  }
+  onKey(event,id,label,typeI) { 
+    this.inputValue = event.target.value;
+    this.listInput.push({id_question: id, reponse: this.inputValue,titre: label,type: typeI});
   }
 }

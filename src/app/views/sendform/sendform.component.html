@@ -43,7 +43,31 @@
   </tab>
   <tab>
     <ng-template tabHeading><i class="icon-paper-plane"></i> Sent &nbsp;<span class="badge badge-pill badge-danger">{{cptmail}}</span></ng-template>
-   loading ...
+    <div class="card">
+ 
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th><i class="fa fa-inbox"></i> Sent message</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of traceMail" (click)="RowSelected(i)" [class.active]="i == selectedRow">
+                <td>To: {{i.receiver}}<br>
+                  <small>Subject: {{i.subject}}</small>
+                </td>
+              
+              
+              </tr>
+             
+       
+            </tbody>
+          </table>
+ 
+        </div>
+      </div>
   </tab>
 
 </tabset>
