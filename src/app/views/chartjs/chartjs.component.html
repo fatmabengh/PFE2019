@@ -21,7 +21,7 @@
                   </div>
               </div>
             
-            <div class="form-group row">
+<!--             <div class="form-group row">
                 <label class="col-md-4 col-form-label" for="select2">Period</label>
                 <div class="col-md-8">
                   <select id="select2" name="select2" class="form-control form-control-sm" [(ngModel)]="PeriodSelected">
@@ -30,16 +30,16 @@
                   </select>
 
                 </div>
-              </div>
+              </div> -->
 
-            <div class="form-group row" *ngIf="PeriodSelected==1">
+<!--             <div class="form-group row" *ngIf="PeriodSelected==1">
                   <label class="col-md-4 col-form-label" for="date-input">Select Date</label>
                   <div class="col-md-8">
                       <div class="col-md-9">
                         <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
                       </div>
                   </div>
-                </div>
+                </div> -->
             </form>
 
       </div>
@@ -102,3 +102,10 @@
     </div>
   </div>
   </div>
+
+  <div *ngIf="!exist">
+    
+    <strong>No Insights Available</strong> <br>
+   <small> you can analyze certain fields to produce insights like dropdown, rating, checkboxe, date, slider, etc … 
+    If your form does not contain any of these fields you will see the No Insights Available error</small>
+  </div> 
