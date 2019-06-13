@@ -31,8 +31,7 @@ export class RegisterComponent implements OnInit {
      
      
     this.UserService.Registration(this.registration.value).subscribe((data: any) => {
-      console.log(data);
-      if (data ==true){
+     if (data ==true){
         localStorage.setItem('userID', data.user_id);
         this.msg.success('user registred successfully');
         this.router.navigate(['/login']);

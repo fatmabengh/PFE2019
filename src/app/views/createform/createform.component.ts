@@ -72,9 +72,7 @@ export class CreateformComponent implements OnInit,AfterViewInit {
     });
   }
   SaveGeneralConfig(){
-   console.log(this.form.valid);
-   //if (this.form.validator)
-   if(this.form.valid){
+  if(this.form.valid){
     this.modalRef.hide();}
     
   }
@@ -85,7 +83,6 @@ export class CreateformComponent implements OnInit,AfterViewInit {
   AddFields(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.i=0;
-    //console.log(this.i);
     let type=this.formCreate.get('types').value;
     if(type=='check' ||type=='radio'||type=='dropdown' ){
       for ( let j=0;j<this.ctrlListe.length;j++){
@@ -97,7 +94,6 @@ export class CreateformComponent implements OnInit,AfterViewInit {
   }
   Save(){
     this.modalRef.hide();
-   // console.log(this.formCreate.value);
     this.Createdform.push(this.formCreate.value);
     
   }
@@ -117,11 +113,8 @@ export class CreateformComponent implements OnInit,AfterViewInit {
   this.modalRef = this.modalService.show(EditformComponent);
   this.modalRef.content.form=form;
   this.k =  this.Createdform.findIndex(k => k==form)
- // console.log( this.k);
- 
  this.modalRef.content.edits=this.edit;
  this.modalRef.content.event.subscribe(data => {
-  //console.log('Child component\'s event was triggered', data);
   this.Createdform[this.k]=data;
   
 

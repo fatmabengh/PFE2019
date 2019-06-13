@@ -22,7 +22,7 @@ export class FormulaireService {
     for(let i=0;i<this.ArrayFields.length;i++){
       this.ArrayFields[i]['items']=JSON.stringify(this.ArrayFields[i]['items'])
     }
-    //console.log(this.ArrayFields);
+   
 } 
 setFormData(formData){
   this.form= formData;
@@ -45,7 +45,6 @@ setFormData(formData){
     return this.http.get(this.uri+'/api/userForm/'+ localStorage.getItem('user_id') );
   }
   GetFormId(){
-   // return this.http.get(this.uri+'/api/getForm/'+ localStorage.getItem('form_id') );
    return this.http.get(this.uri+'/getForm/'+ localStorage.getItem('form_id') );
   }
   DeleteForm(){
@@ -69,7 +68,8 @@ setFormData(formData){
       fields: FormEdited,
       user_id: parseInt(localStorage.getItem('user_id'))
     }
-   // console.log(body);
+
+
     return this.http.put(this.uri+'/api/UpdateForm/'+ localStorage.getItem('idForm_Edit'), body ); 
   } 
 

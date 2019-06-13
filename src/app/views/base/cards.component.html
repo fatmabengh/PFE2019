@@ -1,4 +1,4 @@
-<div class="animated fadeIn">
+<div class="animated fadeIn" *ngIf="!exist">
 <!--   <div class="row">
     <div class="col-sm-6 col-md-4">
       <div class="card">
@@ -13,27 +13,7 @@
 
 
     <div class="row">
-      <!-- <div class="col-sm-6">
-        <div class="card">
-          <div class="card-header">
-            Choose Template
-          </div>
-          <div class="card-body">
-            <carousel [interval]="3000">
-              <slide>
-                <img src="https://loremflickr.com/900/500/mountains?lock=1" alt="First slide" style="display: block; width: 100%;">
-              </slide>
-              <slide>
-                <img src="https://loremflickr.com/900/500/mountains?lock=2" alt="Second slide" style="display: block; width: 100%;">
-              </slide>
-              <slide>
-                <img src="https://loremflickr.com/900/500/mountains?lock=3" alt="Third slide" style="display: block; width: 100%;">
-              </slide>
-            </carousel>
-          </div>
-        </div>
-      </div> -->
-      <div class="col-sm-6">
+        <div class="col-sm-6">
         <div class="card">
           <div class="card-header">
             Available Template
@@ -41,15 +21,15 @@
           </div>
           <div class="card-body">
             <carousel [interval]="4500">
-              <slide>
-                <img src="assets/img/template1.PNG" alt="First slide" style="display: block; width: 100%;">
-                <div class="carousel-caption " >
+              <slide (click)="InvitationForm()">
+                <img src="assets/img/template1.PNG" alt="First slide" style="display: block; width: 100%;" >
+                <div class="carousel-caption "  >
                   <h3>Invitation Form</h3>
                   <p>Template of Invitation Form.</p>
                 </div>
               </slide>
-              <slide>
-                <img src="assets/img/template2.PNG" alt="Second slide" style="display: block; width: 100%;">
+              <slide (click)="ContactForm()">
+                <img src="assets/img/template2.PNG" alt="Second slide" style="display: block; width: 100%;"  >
                 <div class="carousel-caption d-none d-md-block">
                   <h3>Contacte Form</h3>
                   <p>Template of Contacte Form.</p>
@@ -61,128 +41,91 @@
       </div>
     </div>
 
-
-
-   <!--  <div class="col-sm-6 col-md-4">
-      <div class="card">
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-        <div class="card-footer">Card footer</div>
-      </div>
-    </div> --><!--/.col-->
-<!--     <div class="col-sm-6 col-md-4">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-check"></i>Card with icon
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
-<!--     <div class="col-sm-6 col-md-4">
-      <div class="card">
-        <div class="card-header">
-          Card with switch
-          <label class="switch switch-sm switch-text switch-info float-right mb-0">
-            <input type="checkbox" class="switch-input">
-            <span class="switch-label" data-on="On" data-off="Off"></span>
-            <span class="switch-handle"></span>
-          </label>
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
-  <!--   <div class="col-sm-6 col-md-4">
-      <div class="card">
-        <div class="card-header">
-          Card with label
-          <span class="badge badge-success float-right">Success</span>
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
- <!--    <div class="col-sm-6 col-md-4">
-      <div class="card">
-        <div class="card-header">
-          Card with label
-          <span class="badge badge-pill badge-danger float-right">42</span>
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div>
-  </div> --><!--/.col--><!--/.row-->
-<!--   <div class="row">
-    <div class="col-sm-6 col-md-4">
-      <div class="card border-primary">
-        <div class="card-header">
-          Card outline
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
-  <!--   <div class="col-sm-6 col-md-4">
-      <div class="card border-secondary">
-        <div class="card-header">
-          Card outline
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
- <!--    <div class="col-sm-6 col-md-4">
-      <div class="card border-success">
-        <div class="card-header">
-          Card outline
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
-  <!--   <div class="col-sm-6 col-md-4">
-      <div class="card border-info">
-        <div class="card-header">
-          Card outline
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
-<!--     <div class="col-sm-6 col-md-4">
-      <div class="card border-warning">
-        <div class="card-header">
-          Card outline
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
-<!--     <div class="col-sm-6 col-md-4">
-      <div class="card border-danger">
-        <div class="card-header">
-          Card outline
-        </div>
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> --><!--/.col-->
-  <!-- </div> --><!--/.row-->
-
-  
- 
  
 </div>
+
+<!--/.edit form here-->
+<div class="row" *ngIf="exist">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-edit"></i>Edit Form Elements
+        <div class="card-header-actions">
+          <button type="button" class="btn btn-pill btn-danger" (click)="AddFields(template)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="card-body" *ngIf="fieldData">
+         
+          <div class="form-group row">
+              <div class="col-md-9">
+                  <strong>{{fieldData.title}}</strong>    <br> <p><small>{{fieldData.description}} </small></p> 
+              </div>
+        </div>
+
+
+        <form class="form-horizontal" >
+          <div *ngFor="let fields of fieldData.field">
+
+
+        <div class="form-group row" *ngIf="fields.types =='input'">
+          <label class="col-md-3 col-form-label" for="text-input"><strong>{{fields.label}}</strong></label>
+          <div class="col-md-9">
+            <input type="text" id="{{fields.id}}"  name="text-input" class="form-control" placeholder="{{fields.subtitle}}">
+           </div>
+        </div>
+
+        <div class="form-group row" *ngIf="fields.types =='dropdown'">
+          <label class="col-md-3 col-form-label" for="select1"><strong>{{fields.label}} </strong></label>
+          <div class="col-md-9">
+            <select id="select" name="select" class="form-control" >                                     
+             <option>Select item</option>
+              <option *ngFor="let objKey of objectKeys(fields.items)" > {{fields.items[objKey]}}</option>                               
+              </select>
+              </div>
+        </div>
+
+
+        <div class="form-group row" *ngIf="fields.types =='radio'">
+          <label class="col-md-3 col-form-label" ><strong>{{fields.label}}</strong></label>
+          <div *ngFor="let objKey of objectKeys(fields.items)">
+          <div class="col-md-9 col-form-label">
+            <div class="form-check">
+              <input  class="form-check-input" type="radio" name="radio" id="{{objKey}}" value="{{fields.items[objKey]}}" >
+              <label class="form-check-label" for="radio" >
+                {{fields.items[objKey]}} 
+            </label>
+        
+            </div>
+           </div>
+          </div>
+     
+        </div>
+
+        <div class="form-group row" *ngIf="fields.types =='check'" >
+          <label class="col-md-3 col-form-label"><strong>{{fields.label}}</strong></label>
+          <div  *ngFor="let objKey of objectKeys(fields.items)">
+          <div class="col-md-9 col-form-label">
+            <div class="form-check">
+              <input  class="form-check-input" name="options" type="checkbox" value="{{fields.items[objKey]}}" id="{{objKey}}" >
+              <label class="form-check-label" for="checkbox">
+                {{fields.items[objKey]}} 
+            </label>
+            </div>
+
+            </div>
+           
+          </div>
+        </div>
+
+      </div>
+     
+      </form>
+
+                          <div class="card-footer">
+                              <button type="submit" class="btn btn-sm btn-primary" (click)="SaveForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                              <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                            </div>
+      </div>
+    </div>
+  </div> <!--/.col-->
+</div><!--/.row-->

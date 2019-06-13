@@ -24,7 +24,7 @@ export class EntriesComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
     this.ResponseService.GetAllResponse().subscribe((data: any) => {
      this.responseData= data;   
-     //console.log(this.responseData);
+    
    });
   }
   
@@ -40,8 +40,7 @@ export class EntriesComponent implements OnInit,AfterViewInit {
     for(let i=0; i<this.responseData.length;i++){
       if (formSelected==this.responseData[i].form_id){
         this.selectData.push(this.responseData[i]);
-       // console.log(this.responseData[i]);
-        this.selected=true;
+           this.selected=true;
 
       }    
       }

@@ -28,20 +28,8 @@ dateArray=[]; data= [];
         this.dateArray.push(this.responseData[i].date);
         
          }       
-    /*   this.responseData.sort((a, b) => {
-        return b.form_id - a.form_id;
-      }); */
-      
-    });
+     });
 
-      // generate random values for mainChart
-/*     for (let i = 0; i <= this.mainChartElements; i++) {
-        
-        this.mainChartData1.push(2,2,7);
-      this.mainChartData1.push(this.random(50, 100));
-       this.mainChartData2.push(this.random(50, 100));
-        this.mainChartData3.push(65);
-    } */
     }
     //éliminer la redondance dans le tableau de X
     cleanArray(array) {
@@ -74,8 +62,7 @@ dateArray=[]; data= [];
         this.mainChartLabels= [];
          let array=this.cleanArray(this.dateArray);        
          let array2= this.countOccurences(this.dateArray);
-         console.log(array2);
-          for (let i=array.length-5;i <array.length;i++){        
+      for (let i=array.length-5;i <array.length;i++){        
            this.mainChartLabels.push(array[i]);
            this.mainChartData1.push(array2[array[i]]);
          } 
@@ -105,15 +92,7 @@ dateArray=[]; data= [];
     {
       data: this.mainChartData1,
       label: 'Submissions'
-    }/*
-    {
-      data: this.mainChartData2,
-      label: 'Views'
-    } ,
-    {
-      data: this.mainChartData3,
-      label: 'Charges'
-    } */
+    }
   ];
   /* tslint:disable:max-line-length */
   public mainChartLabels: Array<any> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

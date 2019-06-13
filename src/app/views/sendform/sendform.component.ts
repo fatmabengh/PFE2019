@@ -21,9 +21,7 @@ selectedRow;
     this.formService.TraceMailer().subscribe((data:any)=> {
       this.traceMail=data;
       this.cptmail=this.traceMail.length;
-      console.log(data);
-
-    });
+     });
   }
   create(){
     this.Sendform = this.fb.group({

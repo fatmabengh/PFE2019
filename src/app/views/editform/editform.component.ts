@@ -43,10 +43,7 @@ export class EditformComponent implements OnInit {
 }
 
 editForm(){
-
- //console.log(this.edit);
-   
-    this.ListeCtrl= [];
+     this.ListeCtrl= [];
     let type= this.form['types'];
     if(type=='check' ||type=='dropdown'||type=='radio'){
   
@@ -81,9 +78,7 @@ editForm(){
          if (!this.formedit.get("subtitle").dirty){
           this.formedit.get("subtitle").setValue(this.form['subtitle']);
          }
-       
-       // console.log(this.formedit.value);
-        this.event.emit(this.formedit.value);
+       this.event.emit(this.formedit.value);
         this.modalService.hide(1);
        }
        ngOnDestroy(){

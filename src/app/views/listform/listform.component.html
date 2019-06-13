@@ -22,8 +22,7 @@
               <td>{{i.description}}</td>
               <td>{{i.date_modif['date']}}</td>
               <td>
-                  <!-- {{i.expiration_date}}**{{dateJour}} -->
-             <div  *ngIf="i.expiration_date > dateJour">
+               <div  *ngIf="i.expiration_date > dateJour">
                   <span class="badge badge-success">Active</span>
                   <div class="btn-group float-right" dropdown>
                       <button type="button" class="btn dropdown-toggle p-0" dropdownToggle>

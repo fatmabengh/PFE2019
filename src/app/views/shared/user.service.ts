@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { User } from './user';
-/* const reqHeader = new HttpHeaders({
-  'content-type': 'application/json',
-  'No-Auth': 'False',
-  'Accept': 'application/json', }); */
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +27,7 @@ export class UserService {
     }
    
     return this.http.post(this.uri + '/signin', body);
-//, {headers: reqHeader}
+
 
   }
 

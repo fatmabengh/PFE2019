@@ -38,7 +38,6 @@ export class ShowFormComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
     this.formService.GetFormId().subscribe((data: any) => {
       this.fieldData = data;
-      console.log(this.fieldData);
       for(let i=0;i<this.fieldData.field.length;i++){
         this.fieldData.field[i].items= JSON.parse( this.fieldData.field[i].items);
      }  
@@ -49,8 +48,7 @@ export class ShowFormComponent implements OnInit,AfterViewInit {
     this.Listcheck = this.Listcheck.concat(this.listInput);
     this.ListDrop= this.ListDrop.concat(this.ListRadio);
     this.listGlot=this.ListDrop.concat( this.Listcheck);
-   // console.log(this.listGlot);
- this.ResponseService.SubmitReponse(this.listGlot).subscribe((data: any) => {
+    this.ResponseService.SubmitReponse(this.listGlot).subscribe((data: any) => {
       this.msg.success(data);
       this.exist=true;
     });  

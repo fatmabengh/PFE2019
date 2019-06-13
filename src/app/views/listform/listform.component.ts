@@ -69,12 +69,9 @@ export class ListformComponent implements OnInit {
 
   EditForm(form_id){
     this.exist=true;
-    //console.log(form_id);
     localStorage.setItem('idForm_Edit',form_id);
     this.formService.getformEdit().subscribe((data: any) => {
       this.fieldData = data;
-   //   console.log(this.fieldData);
-    //  console.log(this.fieldData.field[this.fieldData.field.length - 1].id);
       for(let i=0;i<this.fieldData.field.length;i++){
         
         let type=this.fieldData.field[i].types;
@@ -109,8 +106,6 @@ export class ListformComponent implements OnInit {
 
   Save(){
     this.modalRef.hide();
-    console.log(this.formCreate.value);
-    
     this.Createdform.push(this.formCreate.value); 
    
   }
@@ -129,39 +124,31 @@ export class ListformComponent implements OnInit {
  }
 
  showEditModal(form){
-   console.log(form.id);
   this.edit = ! this.edit;
   this.modalRef = this.modalService.show(EditformComponent);
   this.modalRef.content.form=form;
   this.k =  this.Createdform.findIndex(k => k==form)
   this.modalRef.content.edits=this.edit;
   this.modalRef.content.event.subscribe(data => {
- // console.log('Child component\'s event was triggered', data);
- console.log(data);
- Object.assign(data, {id: form.id});
- 
-  this.Createdform[this.k]=data;
+  Object.assign(data, {id: form.id});
+   this.Createdform[this.k]=data;
   });
  }
 
  SaveForm(){
   this.exist=false;
- //  console.log(this.Createdform);
    this.formService.setFormData(this.fieldData);
    this.formService.EditForm(this.Createdform).subscribe((data: any) => {
-   //  console.log(data);
-   this.msg.success(data);
+     this.msg.success(data);
 
    });
  }
  RowSelected(u:any){
   this.selectedRow=u;
- //console.log(u);
- }
+  }
  DeleteFields(field_id){
-   console.log(field_id);
    localStorage.setItem('idField_Delete',field_id);
-  this.formService.DeleteField().subscribe((data: any) => {
+   this.formService.DeleteField().subscribe((data: any) => {
       this.msg.success(data);
     
     }); 

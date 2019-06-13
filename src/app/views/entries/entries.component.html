@@ -10,10 +10,6 @@
                 <tr>
                   <th>ID</th>
                   <th> All Forms
- <!--                      <select id="select" name="select" class="form-control" (change)="selectDrop($event.target.value)">                                     
-                          <option> All Forms</option>
-                           <option *ngFor="let i of formData" > {{i.title}}</option>                               
-                           </select> -->
                            <div class="btn-group float-right" dropdown>
                               <button type="button" class="btn dropdown-toggle p-0" dropdownToggle>
                                   
@@ -36,14 +32,6 @@
                   <td>{{i.date}}</td>
                  
                 </tr>
-                
- <!--                <tr *ngIf="selected" *ngFor="let i of responseData; let i=index" (click)="RowSelected(i)" [class.active]="i == selectedRow" >
-                    <td>{{i.id}}</td>
-                    <td popover="{{i.titleform}}"
-                    triggers="mouseenter:mouseleave" popover-append-to-body="true">{{i.titleform}}</td>
-                    <td>{{i.date['date']}}</td>
-                   
-                  </tr> -->
               </tbody>
               <tbody *ngIf="!selected">
                   <tr   *ngFor="let i of responseData; let i=index" (click)="RowSelected(i)" [class.active]="i == selectedRow" >
@@ -53,27 +41,11 @@
                     <td>{{i.date}}</td>
                    
                   </tr>
-                  
-   <!--                <tr *ngIf="selected" *ngFor="let i of responseData; let i=index" (click)="RowSelected(i)" [class.active]="i == selectedRow" >
-                      <td>{{i.id}}</td>
-                      <td popover="{{i.titleform}}"
-                      triggers="mouseenter:mouseleave" popover-append-to-body="true">{{i.titleform}}</td>
-                      <td>{{i.date['date']}}</td>
-                     
-                    </tr> -->
+
                 </tbody>
 
             </table>
-<!--             <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul> -->
+
           </div>
   </div>
   </div>

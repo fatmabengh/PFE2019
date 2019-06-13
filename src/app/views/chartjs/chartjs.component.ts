@@ -73,12 +73,10 @@ export class ChartJSComponent implements OnInit  {
        this.dataArray.push(FormTab[i].content);
        } 
       
-     //  var typeTab=[];
      for (let j=0;j<this.dataArray.length;j++){
        this.EntrieAnalyzed =this.dataArray.length;
      for (let k=0;k<this.dataArray[j].length;k++){     
-       //typeTab.push(this.dataArray[j][k].type);
-       if (this.dataArray[j][k].type == 'radio'){
+        if (this.dataArray[j][k].type == 'radio'){
          this.ArrayRadio.push(this.dataArray[j][k].reponse);
          
              }
@@ -88,23 +86,7 @@ export class ChartJSComponent implements OnInit  {
          }  
      } 
      }
-  
-    
-    /*  if (typeTab.find(x => x =='radio') =='radio'|| typeTab.find(x => x =='dropdown')=='dropdown' ){
-       this.exist=true;
-       for (let j=0;j<this.dataArray.length;j++){
-      for (let k=0;k<this.dataArray[j].length;k++){   
-         if (this.dataArray[j][k].type == 'radio'){
-           this.ArrayRadio.push(this.dataArray[j][k].reponse);
-         } else if (this.dataArray[j][k].type == 'dropdown'){ 
-           this.ArrayDropDown.push(this.dataArray[j][k].reponse);
-          }
-       } 
-     } 
-     } else {
-        this.exist=false;
-     }*/
-    
+
      let array=this.cleanArray(this.ArrayRadio);        
      let array2= this.countOccurences(this.ArrayRadio);
      this.barChartLabels=array;
@@ -122,7 +104,7 @@ export class ChartJSComponent implements OnInit  {
  
      }
      changedrop(a){
-       console.log(a);
+     //  console.log(a);
    
      }
 

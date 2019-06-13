@@ -12,8 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): import("rxjs").Observable<HttpEvent<any>> {
         const token: string = localStorage.getItem('userToken');
         if (token) {
-            //request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
-            request = request. clone({ setHeaders: { Authorization: `Bearer ${token}` } });
+           request = request. clone({ setHeaders: { Authorization: `Bearer ${token}` } });
         }
 
         if (!request.headers.has('Content-Type')) {
@@ -22,17 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         return next.handle(request);
-        /* .pipe(
-            map((event: HttpEvent<any>) => {
-                if (event instanceof HttpResponse) {
-                  //  console.log('event--->>>', event);
-                    catchError((error: HttpErrorResponse) => {
-                       return throwError(error);
-                    })
-                }
-                return event;
-            }));
-         */
+
     }
 
     
